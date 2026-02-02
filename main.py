@@ -54,9 +54,9 @@ def run_task():
             if res: 
                 results.extend(res)
             
-            # 强制休眠12秒，确保每分钟请求数低于5次，彻底绕过429限制
-            if i < len(STOCK_CODES) - 1: 
-                time.sleep(12) 
+        # 强制休眠 15 秒（RPM=5 的生死线是 12秒，15秒最稳）
+        if i < len(STOCK_CODES) - 1:
+            time.sleep(15)
         except Exception as e:
             if "429" in str(e):
                 logging.warning("触发限流，额外休眠30秒...")
